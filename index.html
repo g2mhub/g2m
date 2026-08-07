@@ -1,527 +1,407 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0B0B0C">
-<title>G2M — Tecnologia, Serviços Gráficos e HUB</title>
-<meta name="description" content="A G2M monta, mantém e conecta: montagem e manutenção de computadores, serviços gráficos e hub.">
-<link rel="icon" type="image/png" href="imagens/logo-g2m.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#0B0B0C; --surface:#141417; --surface-2:#1B1B1F;
-  --line:#26262B; --ink:#F3F0EA; --ink-dim:#A3A09A;
-  --signal:#FF6A00; --signal-soft:#FF9A52; --signal-ink:#0B0B0C;
-  --wa:#25D366;
-  --radius:16px;
-  --font-display:'Unbounded',sans-serif;
-  --font-body:'Instrument Sans',sans-serif;
-  --font-mono:'JetBrains Mono',monospace;
-  --ease:cubic-bezier(.22,.61,.36,1);
-  --container:min(1200px,calc(100% - 48px));
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-body::after{content:"";position:fixed;inset:0;z-index:2000;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E")}
-::selection{background:var(--signal);color:var(--signal-ink)}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-ul{list-style:none}
-:focus-visible{outline:2px solid var(--signal);outline-offset:3px;border-radius:4px}
-.container{width:var(--container);margin-inline:auto}
-
-/* Header */
-.header{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid transparent;transition:background .35s var(--ease),border-color .35s var(--ease),backdrop-filter .35s}
-.header.scrolled{background:rgba(11,11,12,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;height:76px}
-.logo{display:inline-flex;align-items:center;gap:12px}
-.logo-img{height:44px;width:44px;border-radius:50%;object-fit:contain;background:#000;box-shadow:0 0 22px rgba(255,106,0,.22);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
-.logo:hover .logo-img{transform:scale(1.05);box-shadow:0 0 30px rgba(255,106,0,.4)}
-.nav-links{display:flex;align-items:center;gap:30px}
-.nav-link{position:relative;font-size:.95rem;font-weight:500;color:var(--ink-dim);transition:color .25s}
-.nav-link::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--signal);transition:width .3s var(--ease)}
-.nav-link:hover{color:var(--ink)}
-.nav-link:hover::after{width:100%}
-.nav-cta{margin-left:8px}
-
-/* Botões */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 26px;border-radius:12px;font-weight:600;font-size:.95rem;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:transform .25s var(--ease),box-shadow .25s var(--ease),background .25s,border-color .25s,color .25s}
-.btn-primary{background:var(--signal);color:var(--signal-ink)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(255,106,0,.35)}
-.btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
-.btn-ghost:hover{border-color:var(--signal);color:var(--signal-soft);transform:translateY(-2px)}
-
-/* Hero */
-.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:140px 0 80px;overflow:hidden;scroll-margin-top:90px}
-.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(ellipse at 70% 30%,black 30%,transparent 75%);mask-image:radial-gradient(ellipse at 70% 30%,black 30%,transparent 75%)}
-.hero::after{content:"";position:absolute;top:-20%;right:-10%;width:60vw;height:60vw;background:radial-gradient(circle,rgba(255,106,0,.16),transparent 60%);pointer-events:none}
-.hero-inner{position:relative;z-index:2}
-.badge{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--signal-soft);border:1px solid var(--line);padding:8px 16px;border-radius:999px;background:rgba(255,106,0,.05)}
-.badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--signal);box-shadow:0 0 12px var(--signal)}
-.hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.1rem,6vw,4.6rem);line-height:1.06;letter-spacing:-.01em;margin:28px 0 24px;text-wrap:balance}
-.h-outline{color:transparent;-webkit-text-stroke:1px var(--ink)}
-.h-accent{color:var(--signal);text-shadow:0 0 40px rgba(255,106,0,.35)}
-.lede{max-width:560px;color:var(--ink-dim);font-size:1.12rem}
-.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
-.hero-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:72px}
-.spec{position:relative;border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:rgba(20,20,23,.55);transition:border-color .3s,transform .3s var(--ease),box-shadow .3s}
-.spec::before{content:"";position:absolute;top:0;left:20px;width:26px;height:2px;background:var(--signal)}
-.spec:hover{border-color:rgba(255,106,0,.45);transform:translateY(-4px);box-shadow:0 14px 40px rgba(0,0,0,.35)}
-.spec-label{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
-.spec-value{display:block;font-family:var(--font-display);font-weight:600;font-size:1.02rem;margin-top:10px}
-
-/* Marquee */
-.marquee{background:var(--signal);overflow:hidden;padding:16px 0}
-.marquee-track{display:flex;width:max-content;animation:marquee 30s linear infinite}
-.marquee:hover .marquee-track{animation-play-state:paused}
-.marquee-group{display:flex;align-items:center;gap:44px;padding-right:44px}
-.marquee-item{display:flex;align-items:center;gap:44px;font-family:var(--font-display);font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:.08em;color:var(--signal-ink);white-space:nowrap}
-.marquee-item::after{content:"◆";font-size:.7rem;opacity:.6}
-@keyframes marquee{to{transform:translateX(-50%)}}
-
-/* Seções */
-.section{padding:110px 0;scroll-margin-top:90px}
-.sec-head{margin-bottom:56px;max-width:640px}
-.sec-label{display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--signal)}
-.sec-label::before{content:"";width:28px;height:1px;background:var(--signal)}
-.sec-title{font-family:var(--font-display);font-weight:700;font-size:clamp(1.6rem,3.6vw,2.5rem);line-height:1.15;margin:18px 0 14px;text-wrap:balance}
-.sec-desc{color:var(--ink-dim);font-size:1.05rem}
-
-/* Sobre */
-.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
-.about-copy p{margin-bottom:16px;color:var(--ink-dim)}
-.about-copy strong{color:var(--ink)}
-.about-list{margin:24px 0 32px;display:grid;gap:12px}
-.about-list li{display:flex;gap:12px;align-items:baseline;color:var(--ink);font-weight:500}
-.about-list li::before{content:"▹";color:var(--signal);font-weight:700}
-.panel{position:relative;border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,var(--surface),rgba(20,20,23,.4));padding:36px;overflow:hidden}
-.panel::before{content:"";position:absolute;top:-30%;right:-20%;width:70%;height:70%;background:radial-gradient(circle,rgba(255,106,0,.12),transparent 65%)}
-.panel-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:24px;position:relative;z-index:1}
-.panel-top .logo-img{height:40px;width:40px}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;z-index:1}
-.stat{border:1px solid var(--line);border-radius:14px;padding:20px;background:rgba(11,11,12,.5)}
-.stat-num{font-family:var(--font-display);font-weight:800;font-size:clamp(1.7rem,3vw,2.3rem);color:var(--signal)}
-.stat-label{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-top:8px}
-
-/* Serviços */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
-@media(min-width:1024px){.cards .card:nth-child(2){margin-top:36px}}
-.card{position:relative;border:1px solid var(--line);border-radius:20px;padding:34px;background:linear-gradient(180deg,rgba(27,27,31,.6),rgba(20,20,23,.2));overflow:hidden;transition:transform .35s var(--ease),border-color .35s,box-shadow .35s}
-.card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--signal),transparent 60%)}
-.card:hover{transform:translateY(-6px);border-color:rgba(255,106,0,.4);box-shadow:0 24px 60px rgba(0,0,0,.4)}
-.card-index{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.18em;color:var(--ink-dim)}
-.card-icon{width:52px;height:52px;border:1px solid rgba(255,106,0,.35);border-radius:14px;display:grid;place-items:center;color:var(--signal);margin:22px 0 20px;background:rgba(255,106,0,.06)}
-.card-icon svg{width:26px;height:26px}
-.card h3{font-family:var(--font-display);font-weight:600;font-size:1.12rem;text-transform:uppercase;letter-spacing:.02em;margin-bottom:14px}
-.card p{color:var(--ink-dim);font-size:.98rem;margin-bottom:20px}
-.card ul{display:grid;gap:10px;margin-bottom:26px}
-.card ul li{display:flex;gap:10px;align-items:baseline;font-size:.92rem;color:var(--ink)}
-.card ul li::before{content:"▹";color:var(--signal)}
-.card-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--signal-soft);transition:gap .25s}
-.card-link:hover{gap:14px}
-
-/* Diferenciais */
-.diff-list{display:grid;grid-template-columns:repeat(3,1fr);gap:0 44px}
-.diff{padding:28px 0;border-top:1px solid var(--line);transition:padding-left .3s var(--ease)}
-.diff:hover{padding-left:14px}
-.diff-num{font-family:var(--font-mono);font-size:.75rem;color:var(--signal);letter-spacing:.14em}
-.diff h3{font-size:1.05rem;margin:10px 0 8px;font-weight:600}
-.diff p{color:var(--ink-dim);font-size:.94rem}
-
-/* Contato */
-.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
-.form{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.field{display:grid;gap:8px}
-.field.full{grid-column:1/-1}
-.field label{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)}
-.field input,.field select,.field textarea{width:100%;background:#0E0E11;border:1px solid var(--line);border-radius:12px;padding:14px 16px;color:var(--ink);font-family:var(--font-body);font-size:.98rem;transition:border-color .25s,box-shadow .25s}
-.field input::placeholder,.field textarea::placeholder{color:#6E6B66}
-.field textarea{resize:vertical;min-height:130px}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--signal);box-shadow:0 0 0 4px rgba(255,106,0,.12)}
-.field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23FF9A52' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;cursor:pointer}
-.field select option{background:var(--surface);color:var(--ink)}
-.form-success{grid-column:1/-1;display:none;align-items:center;gap:10px;padding:14px 16px;border:1px solid rgba(255,106,0,.4);border-radius:12px;background:rgba(255,106,0,.07);color:var(--signal-soft);font-size:.95rem}
-.form-success.show{display:flex}
-.info-card{position:sticky;top:100px;border:1px solid var(--line);border-radius:20px;padding:32px;background:linear-gradient(180deg,var(--surface),rgba(20,20,23,.4))}
-.info-item{padding:18px 0;border-bottom:1px solid var(--line)}
-.info-item:last-of-type{border-bottom:none}
-.info-item span{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:6px}
-.info-item a,.info-item p{color:var(--ink);font-weight:500}
-.info-item a:hover{color:var(--signal-soft)}
-.info-cta{margin-top:8px}
-.social-row{display:flex;gap:12px;margin-top:22px}
-.social{width:42px;height:42px;border:1px solid var(--line);border-radius:12px;display:grid;place-items:center;color:var(--ink-dim);transition:color .25s,border-color .25s,transform .25s var(--ease),box-shadow .25s}
-.social svg{width:19px;height:19px}
-.social:hover{color:var(--signal);border-color:var(--signal);transform:translateY(-3px);box-shadow:0 8px 24px rgba(255,106,0,.18)}
-
-/* WhatsApp flutuante */
-.whatsapp-float{position:fixed;right:22px;bottom:22px;z-index:1500;width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 10px 30px rgba(37,211,102,.4);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
-.whatsapp-float svg{width:30px;height:30px}
-.whatsapp-float:hover{transform:scale(1.1) translateY(-3px);box-shadow:0 16px 40px rgba(37,211,102,.5)}
-
-/* Footer */
-.footer{border-top:1px solid var(--line);padding:64px 0 32px;background:#080809}
-.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
-.footer p{color:var(--ink-dim);font-size:.95rem;margin-top:14px;max-width:280px}
-.footer h4{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:16px}
-.footer ul{display:grid;gap:10px}
-.footer ul a{color:var(--ink);font-size:.95rem;transition:color .2s}
-.footer ul a:hover{color:var(--signal-soft)}
-.footer-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--ink-dim);font-size:.85rem}
-
-/* Reveal */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .75s var(--ease),transform .75s var(--ease);transition-delay:var(--d,0s)}
-.reveal.in{opacity:1;transform:none}
-
-/* Menu mobile */
-.menu-btn{display:none;background:none;border:0;cursor:pointer;width:44px;height:44px;position:relative;z-index:120}
-.menu-btn span{display:block;width:24px;height:2px;background:var(--ink);margin:5px auto;transition:transform .3s var(--ease),opacity .3s}
-body.nav-open .menu-btn span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-body.nav-open .menu-btn span:nth-child(2){opacity:0}
-body.nav-open .menu-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-@media(max-width:960px){
-  .menu-btn{display:block}
-  .nav-links{position:fixed;inset:0;background:rgba(11,11,12,.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);flex-direction:column;justify-content:center;gap:34px;opacity:0;pointer-events:none;transition:opacity .35s var(--ease);z-index:110}
-  body.nav-open .nav-links{opacity:1;pointer-events:auto}
-  .nav-link{font-size:1.5rem;font-family:var(--font-display)}
-  .nav-cta{margin-left:0}
-  .about-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
-  .cards{grid-template-columns:1fr}
-  .cards .card:nth-child(2){margin-top:0}
-  .diff-list{grid-template-columns:1fr}
-  .hero-specs{grid-template-columns:1fr}
-  .info-card{position:static}
-  .footer-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:560px){
-  .container{width:min(100% - 32px,1200px)}
-  .form{grid-template-columns:1fr}
-  .section{padding:80px 0}
-  .footer-grid{grid-template-columns:1fr}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-  .reveal{opacity:1;transform:none}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0B0B0C">
+  <title>G2M — Tecnologia, Serviços Gráficos e HUB</title>
+  <meta name="description"
+    content="A G2M monta, mantém e cria: montagem e manutenção de computadores, serviços gráficos e hub.">
+  <link rel="icon" type="image/png" href="imagens/logo-g2m.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<header class="header" id="header">
-  <div class="container header-inner">
-    <a href="#home" class="logo" aria-label="G2M — página inicial">
-      <img src="imagens/logo-g2m.png" alt="G2M" class="logo-img">
-    </a>
-    <nav class="nav" aria-label="Navegação principal">
-      <ul class="nav-links" id="navLinks">
-        <li><a class="nav-link" href="#home">Início</a></li>
-        <li><a class="nav-link" href="#sobre">Sobre</a></li>
-        <li><a class="nav-link" href="#servicos">Serviços</a></li>
-        <li><a class="nav-link" href="#diferenciais">Diferenciais</a></li>
-        <li><a class="nav-link" href="#contato">Contato</a></li>
-        <li><a class="btn btn-primary nav-cta" href="#contato">Solicitar orçamento</a></li>
-      </ul>
-    </nav>
-    <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<main>
-  <section class="hero" id="home">
-    <div class="container hero-inner">
-      <span class="badge">Soluções em tecnologia & serviços gráficos</span>
-      <h1><span class="h-outline">Tecnologia</span> que trabalha <span class="h-accent">por você.</span></h1>
-      <p class="lede">A G2M monta, mantém e cria: do computador certo para o seu uso aos serviços gráficos que dão vida à sua marca — tudo em um só lugar.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#contato">Solicitar orçamento</a>
-        <a class="btn btn-ghost" href="#servicos">Conhecer serviços</a>
-      </div>
-      <div class="hero-specs">
-        <div class="spec"><span class="spec-label">Montagem</span><span class="spec-value">PCs sob medida</span></div>
-        <div class="spec"><span class="spec-label">Manutenção</span><span class="spec-value">Suporte ágil</span></div>
-        <div class="spec"><span class="spec-label">Gráfica</span><span class="spec-value">Serviços gráficos</span></div>
-      </div>
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#home" class="logo" aria-label="G2M — página inicial">
+        <img src="imagens/logo-g2m.png" alt="G2M" class="logo-img">
+      </a>
+      <nav class="nav" aria-label="Navegação principal">
+        <ul class="nav-links" id="navLinks">
+          <li><a class="nav-link" href="#home">Início</a></li>
+          <li><a class="nav-link" href="#sobre">Sobre</a></li>
+          <li><a class="nav-link" href="#servicos">Serviços</a></li>
+          <li><a class="nav-link" href="#diferenciais">Diferenciais</a></li>
+          <li><a class="nav-link" href="#contato">Contato</a></li>
+          <li><a class="btn btn-primary nav-cta" href="#contato">Solicitar orçamento</a></li>
+        </ul>
+      </nav>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </section>
+  </header>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <div class="marquee-group">
-        <span class="marquee-item">Montagem de computadores</span>
-        <span class="marquee-item">Manutenção preventiva</span>
-        <span class="marquee-item">Serviços gráficos</span>
-        <span class="marquee-item">Hub</span>
-        <span class="marquee-item">Suporte técnico</span>
-      </div>
-      <div class="marquee-group">
-        <span class="marquee-item">Montagem de computadores</span>
-        <span class="marquee-item">Manutenção preventiva</span>
-        <span class="marquee-item">Serviços gráficos</span>
-        <span class="marquee-item">Hub</span>
-        <span class="marquee-item">Suporte técnico</span>
-      </div>
-    </div>
-  </div>
-
-  <section class="section" id="sobre">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-copy reveal">
-          <span class="sec-label">01 / Sobre a G2M</span>
-          <h2 class="sec-title">Tecnologia que funciona de verdade.</h2>
-          <p>A <strong>G2M</strong> nasceu para resolver um problema simples: computadores que atendem ao que você precisa e materiais gráficos que valorizam a sua marca. Unimos a precisão da montagem de hardware à criatividade dos serviços gráficos.</p>
-          <p>Atendemos <strong>empresas e consumidores</strong> que buscam um parceiro técnico e criativo de confiança — do primeiro boot à arte final.</p>
-          <ul class="about-list">
-            <li>Atendimento próximo e direto com quem entende</li>
-            <li>Peças e materiais de qualidade garantida</li>
-            <li>Orçamento transparente, sem surpresas</li>
-          </ul>
-          <a class="btn btn-ghost" href="#contato">Fale com a gente</a>
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+        <span class="badge">Soluções em tecnologia & serviços gráficos</span>
+        <h1><span class="h-outline">Tecnologia</span> que trabalha <span class="h-accent">por você.</span></h1>
+        <p class="lede">A G2M monta, mantém e cria: do computador certo para o seu uso aos serviços gráficos que dão
+          vida à sua marca — tudo em um só lugar.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contato">Solicitar orçamento</a>
+          <a class="btn btn-ghost" href="#servicos">Conhecer serviços</a>
         </div>
-        <div class="panel reveal" style="--d:.15s">
-          <div class="panel-top"><span>Ficha da G2M</span><img src="imagens/logo-g2m.png" alt="" class="logo-img" aria-hidden="true"></div>
-          <div class="stats">
-            <div class="stat"><span class="stat-num">500+</span><span class="stat-label">equipamentos montados</span></div>
-            <div class="stat"><span class="stat-num">98%</span><span class="stat-label">clientes satisfeitos</span></div>
-            <div class="stat"><span class="stat-num">24h</span><span class="stat-label">resposta média</span></div>
-            <div class="stat"><span class="stat-num">3</span><span class="stat-label">frentes de atuação</span></div>
+        <div class="hero-specs">
+          <div class="spec"><span class="spec-label">Montagem</span><span class="spec-value">PCs sob medida</span></div>
+          <div class="spec"><span class="spec-label">Manutenção</span><span class="spec-value">Suporte ágil</span></div>
+          <div class="spec"><span class="spec-label">Gráfica</span><span class="spec-value">Serviços gráficos</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="servicos">
-    <div class="container">
-      <div class="sec-head reveal">
-        <span class="sec-label">02 / Serviços</span>
-        <h2 class="sec-title">Do hardware à arte final, tudo em um só lugar.</h2>
-        <p class="sec-desc">Três frentes integradas para o seu negócio rodar e se destacar.</p>
-      </div>
-      <div class="cards">
-        <article class="card reveal">
-          <span class="card-index">01</span>
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10.5" y="10.5" width="3" height="3"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>
-          </div>
-          <h3>Montagem & Manutenção</h3>
-          <p>Computadores montados sob medida e máquinas que voltam a render com performance.</p>
-          <ul>
-            <li>Montagem personalizada: gamer, escritório, servidor</li>
-            <li>Manutenção preventiva e corretiva</li>
-            <li>Upgrades e recuperação de dados</li>
-          </ul>
-          <a class="card-link" href="#contato">Solicitar serviço →</a>
-        </article>
-        <article class="card reveal" style="--d:.12s">
-          <span class="card-index">02</span>
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16v11H4z"/><path d="M12 16v3M8 21h8"/><path d="M7 9l3 3-3 3M13 9h4"/></svg>
-          </div>
-          <h3>Serviços Gráficos</h3>
-          <p>Materiais que valorizam a sua marca: do design à impressão, com acabamento profissional.</p>
-          <ul>
-            <li>Design e identidade visual</li>
-            <li>Impressão de materiais promocionais</li>
-            <li>Arte-final e acabamento profissional</li>
-          </ul>
-          <a class="card-link" href="#contato">Solicitar orçamento →</a>
-        </article>
-        <article class="card reveal" style="--d:.24s">
-          <span class="card-index">03</span>
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="19" r="2.2"/><path d="M6.8 7.4l3.6 9.4M17.2 7.4l-3.6 9.4M7.2 6h9.6"/></svg>
-          </div>
-          <h3>HUB</h3>
-          <p>Um ponto central para sua operação.</p>
-          <ul>
-            <li>Centralização de pedidos, estoque.</li>
-            <li>Ponto de coleta e entrega</li>
-          </ul>
-          <a class="card-link" href="#contato">Conhecer o HUB →</a>
-        </article>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span class="marquee-item">Montagem de computadores</span>
+          <span class="marquee-item">Manutenção preventiva</span>
+          <span class="marquee-item">Serviços gráficos</span>
+          <span class="marquee-item">HUB</span>
+          <span class="marquee-item">Suporte técnico</span>
+        </div>
+        <div class="marquee-group">
+          <span class="marquee-item">Montagem de computadores</span>
+          <span class="marquee-item">Manutenção preventiva</span>
+          <span class="marquee-item">Serviços gráficos</span>
+          <span class="marquee-item">HUB</span>
+          <span class="marquee-item">Suporte técnico</span>
+        </div>
       </div>
     </div>
-  </section>
 
-  <section class="section" id="diferenciais">
-    <div class="container">
-      <div class="sec-head reveal">
-        <span class="sec-label">03 / Diferenciais</span>
-        <h2 class="sec-title">Por que escolher a G2M.</h2>
-        <p class="sec-desc">Critérios que fazem a diferença no dia a dia de quem depende de tecnologia.</p>
+    <section class="section" id="sobre">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-copy reveal">
+            <span class="sec-label">01 / Sobre a G2M</span>
+            <h2 class="sec-title">Tecnologia que funciona de verdade.</h2>
+            <p>A <strong>G2M</strong> nasceu para resolver um problema simples: computadores que atendem ao que você
+              precisa e materiais gráficos que valorizam a sua marca. Unimos a precisão da montagem de hardware à
+              criatividade dos serviços gráficos.</p>
+            <p>Atendemos <strong>empresas e consumidores</strong> que buscam um parceiro técnico e criativo de confiança
+              — do primeiro boot à arte final.</p>
+            <ul class="about-list">
+              <li>Atendimento próximo e direto com quem entende</li>
+              <li>Peças e materiais de qualidade garantida</li>
+              <li>Orçamento transparente, sem surpresas</li>
+            </ul>
+            <a class="btn btn-ghost" href="#contato">Fale com a gente</a>
+          </div>
+          <div class="panel reveal" style="--d:.15s">
+            <div class="panel-top"><span>Ficha da G2M</span><img src="imagens/logo-g2m.png" alt="" class="logo-img">
+            </div>
+            <div class="stats">
+              <div class="stat"><span class="stat-num">500+</span><span class="stat-label">equipamentos montados</span>
+              </div>
+              <div class="stat"><span class="stat-num">98%</span><span class="stat-label">clientes satisfeitos</span>
+              </div>
+              <div class="stat"><span class="stat-num">24h</span><span class="stat-label">resposta média</span></div>
+              <div class="stat"><span class="stat-num">3</span><span class="stat-label">frentes de atuação</span></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="diff-list">
-        <div class="diff reveal"><span class="diff-num">01</span><h3>Peças de qualidade</h3><p>Componentes originais e testados, com garantia real em cada serviço.</p></div>
-        <div class="diff reveal" style="--d:.06s"><span class="diff-num">02</span><h3>Suporte ágil</h3><p>Atendimento rápido e direto, sem filas nem robôs.</p></div>
-        <div class="diff reveal" style="--d:.12s"><span class="diff-num">03</span><h3>Transparência total</h3><p>Orçamento claro antes de qualquer serviço. Você decide com segurança.</p></div>
-        <div class="diff reveal" style="--d:.18s"><span class="diff-num">04</span><h3>Solução completa</h3><p>Hardware, serviços gráficos e integrações em um só parceiro.</p></div>
-        <div class="diff reveal" style="--d:.24s"><span class="diff-num">05</span><h3>Garantia real</h3><p>Serviço certificado e acompanhamento pós-entrega.</p></div>
-        <div class="diff reveal" style="--d:.30s"><span class="diff-num">06</span><h3>Parceria de longo prazo</h3><p>Crescemos junto com você: do primeiro equipamento à operação madura.</p></div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" id="contato">
-    <div class="container">
-      <div class="sec-head reveal">
-        <span class="sec-label">04 / Contato</span>
-        <h2 class="sec-title">Vamos tirar seu projeto do papel?</h2>
-        <p class="sec-desc">Conte o que você precisa — retornamos em até 1 dia útil.</p>
+    <section class="section" id="servicos">
+      <div class="container">
+        <div class="sec-head reveal">
+          <span class="sec-label">02 / Serviços</span>
+          <h2 class="sec-title">Do hardware à arte final, tudo em um só lugar.</h2>
+          <p class="sec-desc">Três frentes integradas para o seu negócio rodar e se destacar.</p>
+        </div>
+        <div class="cards">
+          <article class="card reveal">
+            <span class="card-index">01</span>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="7" y="7" width="10" height="10" rx="1.5" />
+                <rect x="10.5" y="10.5" width="3" height="3" />
+                <path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3" />
+              </svg>
+            </div>
+            <h3>Montagem & Manutenção</h3>
+            <p>Computadores montados sob medida e máquinas que voltam a render com performance.</p>
+            <ul>
+              <li>Montagem personalizada: gamer, escritório, servidor</li>
+              <li>Manutenção preventiva e corretiva</li>
+              <li>Upgrades e recuperação de dados</li>
+            </ul>
+            <a class="card-link" href="#contato">Solicitar serviço →</a>
+          </article>
+          <article class="card reveal" style="--d:.12s">
+            <span class="card-index">02</span>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 5h16v11H4z" />
+                <path d="M12 16v3M8 21h8" />
+                <path d="M7 9l3 3-3 3M13 9h4" />
+              </svg>
+            </div>
+            <h3>Serviços Gráficos</h3>
+            <p>Materiais que valorizam a sua marca: do design à impressão, com acabamento profissional.</p>
+            <ul>
+              <li>Design e identidade visual</li>
+              <li>Impressão de materiais promocionais</li>
+              <li>Arte-final e acabamento profissional</li>
+            </ul>
+            <a class="card-link" href="#contato">Solicitar orçamento →</a>
+          </article>
+          <article class="card reveal" style="--d:.24s">
+            <span class="card-index">03</span>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="5" cy="6" r="2.2" />
+                <circle cx="19" cy="6" r="2.2" />
+                <circle cx="12" cy="19" r="2.2" />
+                <path d="M6.8 7.4l3.6 9.4M17.2 7.4l-3.6 9.4M7.2 6h9.6" />
+              </svg>
+            </div>
+            <h3>HUB</h3>
+            <p>Um ponto central para sua operação.</p>
+            <ul>
+              <li>Centralização de pedidos e estoque</li>
+              <li>Ponto de coleta e entrega</li>
+            </ul>
+            <a class="card-link" href="#contato">Conhecer o HUB →</a>
+          </article>
+        </div>
       </div>
-      <div class="contact-grid">
-        <form class="form reveal" id="contactForm" novalidate>
-          <div class="field">
-            <label for="nome">Nome</label>
-            <input id="nome" name="nome" type="text" placeholder="Seu nome" required>
+    </section>
+
+    <section class="section" id="diferenciais">
+      <div class="container">
+        <div class="sec-head reveal">
+          <span class="sec-label">03 / Diferenciais</span>
+          <h2 class="sec-title">Por que escolher a G2M.</h2>
+          <p class="sec-desc">Critérios que fazem a diferença no dia a dia de quem depende de tecnologia.</p>
+        </div>
+        <div class="diff-list">
+          <div class="diff reveal"><span class="diff-num">01</span>
+            <h3>Peças de qualidade</h3>
+            <p>Componentes originais e testados, com garantia real em cada serviço.</p>
           </div>
-          <div class="field">
-            <label for="email">E-mail</label>
-            <input id="email" name="email" type="email" placeholder="voce@email.com" required>
+          <div class="diff reveal" style="--d:.06s"><span class="diff-num">02</span>
+            <h3>Suporte ágil</h3>
+            <p>Atendimento rápido e direto, sem filas nem robôs.</p>
           </div>
-          <div class="field">
-            <label for="telefone">Telefone</label>
-            <input id="telefone" name="telefone" type="tel" placeholder="(00) 00000-0000">
+          <div class="diff reveal" style="--d:.12s"><span class="diff-num">03</span>
+            <h3>Transparência total</h3>
+            <p>Orçamento claro antes de qualquer serviço. Você decide com segurança.</p>
           </div>
-          <div class="field">
-            <label for="servico">Tipo de serviço</label>
-            <select id="servico" name="servico">
-              <option>Montagem & Manutenção</option>
-              <option>Serviços Gráficos</option>
-              <option>HUB</option>
-              <option>Outro</option>
-            </select>
+          <div class="diff reveal" style="--d:.18s"><span class="diff-num">04</span>
+            <h3>Solução completa</h3>
+            <p>Hardware, serviços gráficos e integrações em um só parceiro.</p>
           </div>
-          <div class="field full">
-            <label for="mensagem">Mensagem</label>
-            <textarea id="mensagem" name="mensagem" placeholder="Descreva sua necessidade..." required></textarea>
+          <div class="diff reveal" style="--d:.24s"><span class="diff-num">05</span>
+            <h3>Garantia real</h3>
+            <p>Serviço certificado e acompanhamento pós-entrega.</p>
           </div>
-          <div class="form-success" id="formSuccess" role="status">✅ Mensagem preparada! Você será direcionado ao nosso WhatsApp.</div>
-          <div class="field full">
-            <button class="btn btn-primary" type="submit" style="width:100%">Enviar pelo WhatsApp</button>
+          <div class="diff reveal" style="--d:.30s"><span class="diff-num">06</span>
+            <h3>Parceria de longo prazo</h3>
+            <p>Crescemos junto com você: do primeiro equipamento à operação madura.</p>
           </div>
-        </form>
-        <aside class="info-card reveal" style="--d:.15s">
-          <div class="info-item"><span>E-mail</span><a href="mailto:g2mhub@gmail.com">g2mhub@gmail.com</a></div>
-          <div class="info-item"><span>WhatsApp</span><a href="https://wa.me/5521978955067" target="_blank" rel="noopener">(21) 97895-5067</a></div>
-          <div class="info-item"><span>Endereço</span><p>Rua São Miguel Arcanjo, 14 — Japeri/RJ</p></div>
-          <div class="info-item"><span>Horário</span><p>Seg. a Sex. 08h às 18h · Sáb. 08h às 14h</p></div>
-          <a class="btn btn-ghost info-cta" href="https://wa.me/5521978955067" target="_blank" rel="noopener" style="width:100%">Chamar no WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contato">
+      <div class="container">
+        <div class="sec-head reveal">
+          <span class="sec-label">04 / Contato</span>
+          <h2 class="sec-title">Vamos tirar seu projeto do papel?</h2>
+          <p class="sec-desc">Conte o que você precisa — retornamos em até 1 dia útil.</p>
+        </div>
+        <div class="contact-grid">
+          <form class="form reveal" id="contactForm" novalidate>
+            <div class="field">
+              <label for="nome">Nome</label>
+              <input id="nome" name="nome" type="text" placeholder="Seu nome" required>
+            </div>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" placeholder="voce@email.com" required>
+            </div>
+            <div class="field">
+              <label for="telefone">Telefone</label>
+              <input id="telefone" name="telefone" type="tel" placeholder="(00) 00000-0000">
+            </div>
+            <div class="field">
+              <label for="servico">Tipo de serviço</label>
+              <select id="servico" name="servico">
+                <option>Montagem & Manutenção</option>
+                <option>Serviços Gráficos</option>
+                <option>HUB</option>
+                <option>Outro</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="mensagem">Mensagem</label>
+              <textarea id="mensagem" name="mensagem" placeholder="Descreva sua necessidade..." required></textarea>
+            </div>
+            <div class="form-success" id="formSuccess" role="status">✅ Mensagem preparada! Você será direcionado ao
+              nosso WhatsApp.</div>
+            <div class="field full">
+              <button class="btn btn-primary" type="submit" style="width:100%">Enviar pelo WhatsApp</button>
+            </div>
+          </form>
+          <aside class="info-card reveal" style="--d:.15s">
+            <div class="info-item"><span>E-mail</span><a href="mailto:g2mhub@gmail.com">g2mhub@gmail.com</a></div>
+            <div class="info-item"><span>WhatsApp</span><a href="https://wa.me/5521978955067" target="_blank"
+                rel="noopener">(21) 97895-5067</a></div>
+            <div class="info-item"><span>Endereço</span>
+              <p>Rua São Miguel Arcanjo, 14 — Japeri/RJ</p>
+            </div>
+            <div class="info-item"><span>Horário</span>
+              <p>Seg. a Sex. 08h às 18h · Sáb. 08h às 14h</p>
+            </div>
+            <a class="btn btn-ghost info-cta" href="https://wa.me/5521978955067" target="_blank" rel="noopener"
+              style="width:100%">Chamar no WhatsApp</a>
+            <div class="social-row">
+              <a class="social" href="https://instagram.com/g2mhub" target="_blank" rel="noopener"
+                aria-label="Instagram da G2M" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+                </svg>
+              </a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#home" class="logo" aria-label="G2M — página inicial">
+            <img src="imagens/logo-g2m.png" alt="G2M" class="logo-img">
+          </a>
+          <p>Soluções em tecnologia, serviços gráficos e HUB para quem quer crescer e se destacar.</p>
           <div class="social-row">
-            <a class="social" href="https://instagram.com/g2mhub" target="_blank" rel="noopener" aria-label="Instagram da G2M" title="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
-            </a>
-            <a class="social" href="https://instagram.com/g2mhub" target="_blank" rel="noopener" aria-label="Facebook da G2M" title="Facebook">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
+            <a class="social" href="https://instagram.com/g2mhub" target="_blank" rel="noopener"
+              aria-label="Instagram da G2M" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+              </svg>
             </a>
           </div>
-        </aside>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <a href="#home" class="logo" aria-label="G2M — página inicial">
-          <img src="imagens/logo-g2m.png" alt="G2M" class="logo-img">
-        </a>
-        <p>Soluções em tecnologia, serviços gráficos e hub para quem quer crescer e se destacar.</p>
-        <div class="social-row">
-          <a class="social" href="https://instagram.com/g2mhub" target="_blank" rel="noopener" aria-label="Instagram da G2M" title="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
-          </a>
-          <a class="social" href="https://instagram.com/g2mhub" target="_blank" rel="noopener" aria-label="Facebook da G2M" title="Facebook">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
-          </a>
+        </div>
+        <div>
+          <h4>Institucional</h4>
+          <ul>
+            <li><a href="#home">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#diferenciais">Diferenciais</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Serviços</h4>
+          <ul>
+            <li><a href="#servicos">Montagem & Manutenção</a></li>
+            <li><a href="#servicos">Serviços Gráficos</a></li>
+            <li><a href="#servicos">HUB</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contato</h4>
+          <ul>
+            <li><a href="mailto:g2mhub@gmail.com">g2mhub@gmail.com</a></li>
+            <li><a href="https://wa.me/5521978955067" target="_blank" rel="noopener">(21) 97895-5067</a></li>
+            <li><a href="#contato">Seg. a Sex. 08h às 18h · Sáb. 08h às 14h</a></li>
+          </ul>
         </div>
       </div>
-      <div>
-        <h4>Institucional</h4>
-        <ul>
-          <li><a href="#home">Início</a></li>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#diferenciais">Diferenciais</a></li>
-          <li><a href="#contato">Contato</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Serviços</h4>
-        <ul>
-          <li><a href="#servicos">Montagem & Manutenção</a></li>
-          <li><a href="#servicos">Serviços Gráficos</a></li>
-          <li><a href="#servicos">HUB</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contato</h4>
-        <ul>
-          <li><a href="mailto:g2mhub@gmail.com">g2mhub@gmail.com</a></li>
-          <li><a href="https://wa.me/5521978955067" target="_blank" rel="noopener">(21) 97895-5067</a></li>
-          <li><a href="#contato">Seg. a Sex. 08h às 18h · Sáb. 08h às 14h</a></li>
-        </ul>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> G2M — Todos os direitos reservados.</span>
+        <span>Montado com precisão, como um bom hardware.</span>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© <span id="year"></span> G2M — Todos os direitos reservados.</span>
-      <span>Montado com precisão, como um bom hardware.</span>
-    </div>
-  </div>
-</footer>
+  </footer>
 
-<a class="whatsapp-float" href="https://wa.me/5521978955067" target="_blank" rel="noopener" aria-label="Falar com a G2M no WhatsApp">
-  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
+  <a class="whatsapp-float" href="https://wa.me/5521978955067" target="_blank" rel="noopener"
+    aria-label="Falar com a G2M no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </a>
 
-<script>
-const header = document.getElementById('header');
-const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
-window.addEventListener('scroll', onScroll, { passive: true });
-onScroll();
+  <script>
+    const header = document.getElementById('header');
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
-const menuBtn = document.getElementById('menuBtn');
-menuBtn.addEventListener('click', () => {
-  const open = document.body.classList.toggle('nav-open');
-  menuBtn.setAttribute('aria-expanded', open);
-  menuBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-});
-document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
-  document.body.classList.remove('nav-open');
-  menuBtn.setAttribute('aria-expanded', 'false');
-  menuBtn.setAttribute('aria-label', 'Abrir menu');
-}));
+    const menuBtn = document.getElementById('menuBtn');
+    const menuLinks = document.querySelectorAll('.nav-links a');
+    const setMenu = open => {
+      document.body.classList.toggle('nav-open', open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    };
+    menuBtn.addEventListener('click', () => setMenu(!document.body.classList.contains('nav-open')));
+    menuLinks.forEach(a => a.addEventListener('click', () => {
+      setMenu(false);
+      // Re-focus after a tick: em alguns webviews a navegação por âncora rouba o foco do botão.
+      setTimeout(() => menuBtn.focus(), 0);
+    }));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && document.body.classList.contains('nav-open')) {
+        setMenu(false);
+        menuBtn.focus();
+      }
+    });
+    const mobileMq = window.matchMedia('(max-width: 960px)');
+    mobileMq.addEventListener('change', e => { if (!e.matches) setMenu(false); });
 
-const io = new IntersectionObserver(entries => entries.forEach(e => {
-  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-}), { threshold: .12, rootMargin: '0px 0px -40px' });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      }), { threshold: .12, rootMargin: '0px 0px -40px' });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+    }
 
-const form = document.getElementById('contactForm');
-form.addEventListener('submit', e => {
-  e.preventDefault();
-  const nome = document.getElementById('nome').value;
-  const email = document.getElementById('email').value;
-  const telefone = document.getElementById('telefone').value;
-  const servico = document.getElementById('servico').value;
-  const mensagem = document.getElementById('mensagem').value;
-  const texto = `Olá, G2M! Meu nome é ${nome}.\n\nE-mail: ${email}\nTelefone: ${telefone}\nServiço: ${servico}\n\n${mensagem}`;
-  window.open(`https://wa.me/5521978955067?text=${encodeURIComponent(texto)}`, '_blank');
-  const ok = document.getElementById('formSuccess');
-  ok.classList.add('show');
-  form.reset();
-  setTimeout(() => ok.classList.remove('show'), 6000);
-});
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const telefone = document.getElementById('telefone').value.trim();
+      const servico = document.getElementById('servico').value;
+      const mensagem = document.getElementById('mensagem').value.trim();
+      const texto = `Olá, G2M! Meu nome é ${nome}.\n\nE-mail: ${email}\nTelefone: ${telefone}\nServiço: ${servico}\n\n${mensagem}`;
+      const url = `https://wa.me/5521978955067?text=${encodeURIComponent(texto)}`;
+      const win = window.open(url, '_blank');
+      if (win) win.opener = null;
+      else window.location.href = url;
+      const ok = document.getElementById('formSuccess');
+      ok.classList.add('show');
+      form.reset();
+      setTimeout(() => ok.classList.remove('show'), 6000);
+    });
 
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
+
 </html>
