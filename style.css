@@ -170,14 +170,28 @@ ul {
   right: 0;
   z-index: 100;
   border-bottom: 1px solid transparent;
-  transition: background .35s var(--ease), border-color .35s var(--ease), backdrop-filter .35s;
+  transition: border-color .35s var(--ease);
 }
 
-.header.scrolled {
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: var(--header-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .35s var(--ease);
+}
+
+.header.scrolled {
   border-color: var(--line);
+}
+
+.header.scrolled::before {
+  opacity: 1;
 }
 
 .header-inner {
