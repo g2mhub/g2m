@@ -1,27 +1,6 @@
-/*
- * G2M — style.css
- * Índice de seções:
- * 01. Variáveis & tema (escuro/claro)
- * 02. Reset & base
- * 03. Header & navegação
- * 04. Botões (.btn, .btn-block)
- * 05. Hero
- * 06. Marquee
- * 07. Seções (geral)
- * 08. Sobre
- * 09. Serviços
- * 10. Diferenciais
- * 11. Contato
- * 12. WhatsApp flutuante
- * 13. Footer
- * 14. Animação reveal
- * 15. Menu mobile
- * 16. Media queries
- * 17. Tema claro (prefers-color-scheme)
- * 18. Página de links (ignorantelanhes.html)
- */
 
-/* 01. Variáveis & tema */
+
+
 :root {
   --bg: #0B0B0C;
   --surface: #141417;
@@ -30,6 +9,7 @@
   --ink: #F3F0EA;
   --ink-dim: #A3A09A;
   --signal: #ff0000;
+  --signal2: #fdfdfd;
   --signal-soft: #ff5252;
   --signal-ink: #0B0B0C;
   --wa: #25D366;
@@ -53,7 +33,7 @@
   color-scheme: dark;
 }
 
-/* 17. Tema claro — manual via toggle (data-theme="light") ou automático via sistema */
+
 html[data-theme="light"] {
   --bg: #F5F3EE;
   --surface: #FFFFFF;
@@ -62,6 +42,7 @@ html[data-theme="light"] {
   --ink: #161513;
   --ink-dim: #6B675F;
   --signal: #e80000;
+  --signal2: #fdfdfd;
   --signal-soft: #c80000;
   --signal-ink: #FFFFFF;
   --header-bg: rgba(255, 255, 255, .85);
@@ -87,6 +68,7 @@ html[data-theme="light"] {
     --ink: #161513;
     --ink-dim: #6B675F;
     --signal: #e80000;
+    --signal2: #fdfdfd;
     --signal-soft: #c80000;
     --signal-ink: #FFFFFF;
     --header-bg: rgba(255, 255, 255, .85);
@@ -163,7 +145,7 @@ ul {
   margin-inline: auto;
 }
 
-/* Header */
+
 .header {
   position: fixed;
   top: 0;
@@ -317,7 +299,7 @@ html[data-theme="light"] .theme-btn .icon-moon {
   }
 }
 
-/* Botões */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -359,7 +341,7 @@ html[data-theme="light"] .theme-btn .icon-moon {
   width: 100%;
 }
 
-/* Hero */
+
 .hero {
   position: relative;
   min-height: 100svh;
@@ -501,7 +483,7 @@ html[data-theme="light"] .theme-btn .icon-moon {
   margin-top: 10px;
 }
 
-/* Marquee */
+
 .marquee {
   background: var(--signal);
   overflow: hidden;
@@ -550,7 +532,7 @@ html[data-theme="light"] .theme-btn .icon-moon {
   }
 }
 
-/* Seções */
+
 .section {
   padding: 110px 0;
   scroll-margin-top: 90px;
@@ -593,7 +575,7 @@ html[data-theme="light"] .theme-btn .icon-moon {
   font-size: 1.05rem;
 }
 
-/* Sobre */
+
 .about-grid {
   display: grid;
   grid-template-columns: 1.05fr .95fr;
@@ -702,7 +684,7 @@ html[data-theme="light"] .theme-btn .icon-moon {
   margin-top: 8px;
 }
 
-/* Serviços */
+
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -812,7 +794,7 @@ html[data-theme="light"] .theme-btn .icon-moon {
   gap: 14px;
 }
 
-/* Diferenciais */
+
 .diff-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -847,7 +829,7 @@ html[data-theme="light"] .theme-btn .icon-moon {
   font-size: .94rem;
 }
 
-/* Contato */
+
 .contact-grid {
   display: grid;
   grid-template-columns: 1.1fr .9fr;
@@ -1012,7 +994,7 @@ html[data-theme="light"] .theme-btn .icon-moon {
   box-shadow: 0 8px 24px rgba(255, 106, 0, .18);
 }
 
-/* WhatsApp flutuante */
+
 .whatsapp-float {
   position: fixed;
   right: 22px;
@@ -1039,7 +1021,7 @@ html[data-theme="light"] .theme-btn .icon-moon {
   box-shadow: 0 16px 40px rgba(37, 211, 102, .5);
 }
 
-/* Footer */
+
 .footer {
   border-top: 1px solid var(--line);
   padding: 64px 0 32px;
@@ -1095,7 +1077,7 @@ html[data-theme="light"] .theme-btn .icon-moon {
   font-size: .85rem;
 }
 
-/* Reveal */
+
 .reveal {
   opacity: 0;
   transform: translateY(26px);
@@ -1108,7 +1090,7 @@ html[data-theme="light"] .theme-btn .icon-moon {
   transform: none;
 }
 
-/* Menu mobile */
+
 .menu-btn {
   display: none;
   background: none;
@@ -1245,14 +1227,14 @@ body.nav-open .menu-btn span:nth-child(3) {
     transition: none !important;
   }
 
-  /* Manter a marquee animando mesmo com reduced-motion */
+  
   .marquee-track {
     animation-duration: 20s !important;
     animation-iteration-count: infinite !important;
   }
 }
 
-/* 18. Página de links (ignorantelanhes.html) */
+
 body.lktree-page {
   min-height: 100svh;
   display: flex;
@@ -1279,6 +1261,7 @@ body.lktree-page .container {
 .lktree-avatar {
   width: 96px;
   height: 96px;
+  padding: 6px;
   border-radius: 50%;
   object-fit: contain;
   background: #000;
@@ -1364,18 +1347,26 @@ body.lktree-page .container {
 
 .lktree-link:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 106, 0, .45);
+  border-color: rgba(255, 38, 0, 0.45);
   box-shadow: 0 16px 48px rgba(0, 0, 0, .35);
+}
+
+.lktree-link--wa:hover {
+  border-color: rgba(37, 211, 102, .65);
 }
 
 .lktree-link:hover::before {
   opacity: 1;
 }
 
+.lktree-link--wa::before {
+  background: linear-gradient(90deg, var(--wa), transparent 60%);
+}
+
 .lktree-link-icon {
   width: 44px;
   height: 44px;
-  border: 1px solid rgba(255, 106, 0, .3);
+  border: 1px solid rgba(255, 0, 0, 0.3);
   border-radius: 12px;
   display: grid;
   place-items: center;
@@ -1394,6 +1385,11 @@ body.lktree-page .container {
 .lktree-link:hover .lktree-link-icon {
   background: rgba(255, 106, 0, .12);
   border-color: var(--signal);
+}
+
+.lktree-link--wa:hover .lktree-link-icon {
+  background: rgba(37, 211, 102, .12);
+  border-color: var(--wa);
 }
 
 .lktree-link-icon svg {
@@ -1427,6 +1423,120 @@ body.lktree-page .container {
 }
 
 .lktree-link:hover .lktree-link-arrow {
+  color: var(--signal);
+  transform: translateX(4px);
+}
+
+.lktree-link--wa:hover .lktree-link-arrow {
+  color: var(--wa);
+}
+
+
+.lktree-links2 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.lktree-links2 .lktree-link:nth-child(1) {
+  --d: .2s;
+}
+
+.lktree-links2 .lktree-link:nth-child(2) {
+  --d: .28s;
+}
+
+.lktree-links2 .lktree-link:nth-child(3) {
+  --d: .36s;
+}
+
+.lktree-link2 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--card-top), var(--card-bottom));
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform .3s var(--ease), border-color .3s, box-shadow .3s;
+  overflow: hidden;
+}
+
+.lktree-link2::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--signal), transparent 60%);
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.lktree-link2:hover {
+  transform: translateY(-4px);
+  border-color: rgb(255, 255, 255);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, .35);
+}
+
+.lktree-link2:hover::before {
+  opacity: 1;
+}
+
+.lktree-link2-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: var(--signal2);
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.144);
+  transition: background .3s, border-color .3s;
+}
+
+.lktree-link2:hover .lktree-link-icon {
+  background: rgba(250, 250, 250, 0.12);
+  border-color: var(--signal2);
+}
+
+.lktree-link2-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.lktree-link2-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lktree-link2-label {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.lktree-link2-text {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.lktree-link2-arrow {
+  margin-left: auto;
+  color: var(--ink-dim);
+  transition: color .3s, transform .3s var(--ease);
+}
+
+.lktree-link2:hover .lktree-link-arrow {
   color: var(--signal);
   transform: translateX(4px);
 }
