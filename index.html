@@ -8,7 +8,7 @@
   <script>
     (function () {
       var t = localStorage.getItem('theme');
-      if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      if (!t) t = 'dark';
       document.documentElement.dataset.theme = t;
       var mc = document.querySelector('meta[name="theme-color"]');
       if (mc) mc.setAttribute('content', t === 'light' ? '#F5F3EE' : '#0B0B0C');
@@ -22,7 +22,7 @@
   <meta property="og:site_name" content="G2M">
   <meta property="og:title" content="G2M — Tecnologia, Serviços Gráficos e HUB">
   <meta property="og:description"
-    content="A G2M monta, mantém e cria: montagem e manutenção de computadores, serviços gráficos e hub.">
+    content="A G2M conserta, monta, mantém e cria: montagem e manutenção de computadores, serviços gráficos e hub.">
   <meta property="og:image" content="https://g2mhub.com.br/imagens/logo-g2m.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:url" content="https://g2mhub.com.br/">
@@ -75,16 +75,15 @@
       <div class="container hero-inner">
         <span class="badge">Soluções em tecnologia & serviços gráficos</span>
         <h1><span class="h-outline">Tecnologia</span> que trabalha <span class="h-accent">por você.</span></h1>
-        <p class="lede">A G2M monta, mantém e cria: do computador certo para o seu uso aos serviços gráficos que dão
-          vida à sua marca — tudo em um só lugar.</p>
+        <p class="lede">Conserto de celular e computador, montagem sob medida, manutenção, criação de marca e serviços gráficos. A G2M faz tudo — e faz em um só lugar.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#contato">Solicitar orçamento</a>
           <a class="btn btn-ghost" href="#servicos">Conhecer serviços</a>
         </div>
         <div class="hero-specs">
-          <div class="spec"><span class="spec-label">Montagem</span><span class="spec-value">PCs sob medida</span></div>
-          <div class="spec"><span class="spec-label">Manutenção</span><span class="spec-value">Suporte ágil</span></div>
-          <div class="spec"><span class="spec-label">Gráfica</span><span class="spec-value">Serviços gráficos</span>
+          <div class="spec"><span class="spec-label">Assistência</span><span class="spec-value">Ágil e eficiente</span></div>
+          <div class="spec"><span class="spec-label">Design</span><span class="spec-value">Único e criativo</span></div>
+          <div class="spec"><span class="spec-label">Gráfica</span><span class="spec-value">Impressões de qualidade</span>
           </div>
         </div>
       </div>
@@ -96,25 +95,25 @@
           <span class="marquee-item">Serviços gráficos</span>
           <span class="marquee-item">Mídia social</span>
           <span class="marquee-item">Montagem e Manutenção de computadores</span>
-          <span class="marquee-item">HUB</span>
+          <span class="marquee-item">Conserto de celulares</span>
         </div>
         <div class="marquee-group">
           <span class="marquee-item">Serviços gráficos</span>
           <span class="marquee-item">Mídia social</span>
           <span class="marquee-item">Montagem e Manutenção de computadores</span>
-          <span class="marquee-item">HUB</span>
+          <span class="marquee-item">Conserto de celulares</span>
         </div>
         <div class="marquee-group">
           <span class="marquee-item">Serviços gráficos</span>
           <span class="marquee-item">Mídia social</span>
           <span class="marquee-item">Montagem e Manutenção de computadores</span>
-          <span class="marquee-item">HUB</span>
+          <span class="marquee-item">Conserto de celulares</span>
         </div>
         <div class="marquee-group">
           <span class="marquee-item">Serviços gráficos</span>
           <span class="marquee-item">Mídia social</span>
           <span class="marquee-item">Montagem e Manutenção de computadores</span>
-          <span class="marquee-item">HUB</span>
+          <span class="marquee-item">Conserto de celulares</span>
         </div>
       </div>
     </div>
@@ -125,9 +124,7 @@
           <div class="about-copy reveal">
             <span class="sec-label">01 / Sobre a G2M</span>
             <h2 class="sec-title">Tecnologia que funciona de verdade.</h2>
-            <p>A <strong>G2M</strong> nasceu para resolver um problema simples: computadores que atendem ao que você
-              precisa e materiais gráficos que valorizam a sua marca. Unimos a precisão da montagem de hardware à
-              criatividade dos serviços gráficos.</p>
+            <p>A <strong>G2M</strong> nasceu para resolver um problema simples: tecnologia e comunicação que funcionam de verdade. Do celular que precisa de conserto ao computador montado sob medida, da manutenção que evita dor de cabeça à criação e impressão que valoriza a sua marca — precisão técnica e criatividade no mesmo lugar.</p>
             <p>Atendemos <strong>empresas e consumidores</strong> que buscam um parceiro técnico e criativo de confiança
               — do primeiro boot à arte final.</p>
             <ul class="about-list">
@@ -207,13 +204,13 @@
                 <path d="M6.8 7.4l3.6 9.4M17.2 7.4l-3.6 9.4M7.2 6h9.6" />
               </svg>
             </div>
-            <h3>HUB</h3>
-            <p>Um ponto central para sua operação.</p>
+            <h3>Conserto de Celulares</h3>
+            <p>Reparos rápidos e eficientes para o seu dispositivo móvel.</p>
             <ul>
-              <li>Centralização de pedidos e estoque</li>
-              <li>Ponto de coleta e entrega</li>
+              <li>Diagnóstico e reparo de danos físicos</li>
+              <li>Substituição de peças originais</li>
             </ul>
-            <a class="card-link" href="#contato">Conhecer o HUB →</a>
+            <a class="card-link" href="#contato">Solicitar serviço →</a>
           </article>
         </div>
       </div>
@@ -241,7 +238,7 @@
           </div>
           <div class="diff reveal" style="--d:.18s"><span class="diff-num">04</span>
             <h3>Solução completa</h3>
-            <p>Hardware, serviços gráficos e integrações em um só parceiro.</p>
+            <p>Hardware, serviços gráficos e software.</p>
           </div>
           <div class="diff reveal" style="--d:.24s"><span class="diff-num">05</span>
             <h3>Garantia real</h3>
@@ -281,7 +278,7 @@
               <select id="servico" name="servico">
                 <option>Montagem & Manutenção</option>
                 <option>Serviços Gráficos</option>
-                <option>HUB</option>
+                <option>Conserto de Celulares</option>
                 <option>Outro</option>
               </select>
             </div>
@@ -356,7 +353,7 @@
           <ul>
             <li><a href="#servicos">Montagem & Manutenção</a></li>
             <li><a href="#servicos">Serviços Gráficos</a></li>
-            <li><a href="#servicos">HUB</a></li>
+            <li><a href="#servicos">Conserto de Celulares</a></li>
           </ul>
         </div>
         <div>
@@ -427,12 +424,6 @@
       localStorage.setItem('theme', next);
     });
     syncTheme(rootEl.dataset.theme);
-    if (!localStorage.getItem('theme')) {
-      const themeMq = window.matchMedia('(prefers-color-scheme: light)');
-      const onThemeChange = e => syncTheme(e.matches ? 'light' : 'dark');
-      if (themeMq.addEventListener) themeMq.addEventListener('change', onThemeChange);
-      else if (themeMq.addListener) themeMq.addListener(onThemeChange);
-    }
 
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(entries => entries.forEach(e => {
